@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -155,20 +156,52 @@ const app=initializeApp(firebaseConfig);const db=getFirestore(app);
 window.db=db;window.collection=collection;window.addDoc=addDoc;console.log("Firebase initialisé avec succès");
 </script>
 <script>
-// ── IMAGES GÉNÉRIQUES POUR LE LAIT ──
-const IMG1=`data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'><rect width='600' height='400' fill='%23f0f5ff'/><rect x='150' y='60' width='300' height='300' rx='20' fill='%23ffffff' stroke='%231a4d8f' stroke-width='3'/><rect x='170' y='80' width='260' height='260' rx='10' fill='%23e8f0fe'/><text x='300' y='180' font-family='Arial' font-size='32' font-weight='bold' fill='%231a4d8f' text-anchor='middle'>MADILAIT</text><text x='300' y='220' font-family='Arial' font-size='18' fill='%23555' text-anchor='middle'>Lait en poudre</text><text x='300' y='250' font-family='Arial' font-size='16' fill='%23777' text-anchor='middle'>100% qualité supérieure</text><circle cx='300' cy='310' r='20' fill='%23f5a623'/><text x='300' y='316' font-family='Arial' font-size='12' fill='white' text-anchor='middle'>✓</text></svg>`;
-const IMG2=`data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'><rect width='600' height='400' fill='%23e8f5e9'/><rect x='130' y='50' width='340' height='300' rx='25' fill='%23ffffff' stroke='%232E7D32' stroke-width='3'/><rect x='155' y='75' width='290' height='250' rx='12' fill='%23c8e6c9'/><text x='300' y='170' font-family='Arial' font-size='34' font-weight='bold' fill='%232E7D32' text-anchor='middle'>MADILAIT</text><text x='300' y='210' font-family='Arial' font-size='18' fill='%23555' text-anchor='middle'>Qualité supérieure</text><text x='300' y='240' font-family='Arial' font-size='14' fill='%23777' text-anchor='middle'>Lait en poudre instantané</text><circle cx='300' cy='295' r='18' fill='%232E7D32'/><text x='300' y='301' font-family='Arial' font-size='12' fill='white' text-anchor='middle'>100%</text></svg>`;
-const IMG3=`data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'><rect width='600' height='400' fill='%23fff8e1'/><rect x='140' y='55' width='320' height='300' rx='22' fill='%23ffffff' stroke='%23f5a623' stroke-width='3'/><rect x='165' y='80' width='270' height='250' rx='10' fill='%23ffecb3'/><text x='300' y='175' font-family='Arial' font-size='30' font-weight='bold' fill='%23e65100' text-anchor='middle'>MADILAIT</text><text x='300' y='210' font-family='Arial' font-size='18' fill='%23555' text-anchor='middle'>Lait en poudre</text><text x='300' y='240' font-family='Arial' font-size='14' fill='%23777' text-anchor='middle'>Qualité garantie</text><rect x='250' y='270' width='100' height='30' rx='5' fill='%23f5a623'/><text x='300' y='290' font-family='Arial' font-size='12' fill='white' text-anchor='middle'>BIO</text></svg>`;
-const IMG4=`data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'><rect width='600' height='400' fill='%23e3f2fd'/><rect x='120' y='40' width='360' height='320' rx='18' fill='%23ffffff' stroke='%231a4d8f' stroke-width='3'/><rect x='145' y='65' width='310' height='270' rx='8' fill='%23bbdefb'/><text x='300' y='160' font-family='Arial' font-size='36' font-weight='bold' fill='%231a4d8f' text-anchor='middle'>MADILAIT</text><text x='300' y='200' font-family='Arial' font-size='20' fill='%23555' text-anchor='middle'>Lait en poudre</text><text x='300' y='230' font-family='Arial' font-size='15' fill='%23777' text-anchor='middle'>Format grossiste</text><circle cx='300' cy='285' r='22' fill='%23f5a623'/><text x='300' y='292' font-family='Arial' font-size='14' fill='white' text-anchor='middle'>kg</text></svg>`;
-const IMG5=`data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'><rect width='600' height='400' fill='%23fce4ec'/><rect x='110' y='30' width='380' height='340' rx='20' fill='%23ffffff' stroke='%23c62828' stroke-width='3'/><rect x='140' y='55' width='320' height='290' rx='10' fill='%23f8bbd0'/><text x='300' y='165' font-family='Arial' font-size='34' font-weight='bold' fill='%23c62828' text-anchor='middle'>MADILAIT</text><text x='300' y='205' font-family='Arial' font-size='20' fill='%23555' text-anchor='middle'>Lait en poudre</text><text x='300' y='235' font-family='Arial' font-size='16' fill='%23777' text-anchor='middle'>Format économique</text><circle cx='300' cy='285' r='24' fill='%23c62828'/><text x='300' y='292' font-family='Arial' font-size='14' fill='white' text-anchor='middle'>kg</text></svg>`;
+// ── IMAGES MADILAIT (dossier te/) ──
+const IMG1 = "te/Sachet_madilait_12g.jpeg";
+const IMG1B = "te/carton1_madilait_12g.jpeg";
+const IMG1C = "te/carton2_madilait_12g.jpeg";
+
+const IMG2 = "te/Sachet_madilait_400g.jpeg";
+const IMG2B = "te/carton1_madilait_400g.jpeg";
+const IMG2C = "te/carton2_madilait_400g.jpeg";
+
+const IMG3 = "te/madilait-400g-1.jpg";
+const IMG3B = "te/madilait-400g-2.jpg";
+const IMG3C = "te/madilait-400g-3.jpg";
+
+const IMG4 = "te/madilait-5kg-1.jpg";
+const IMG4B = "te/madilait-5kg-2.jpg";
+
+const IMG5 = "te/madilait-10kg-1.jpg";
+const IMG5B = "te/madilait-10kg-2.jpg";
 
 // ── PRODUITS MADILAIT ──
-const products=[
-{id:1,name:"MADILAIT - Carton 12g (100 sachets)",price:3500,img:IMG1,gallery:[IMG1,IMG2,IMG3],desc:"Carton de 100 sachets de 12g de lait en poudre MADILAIT. Idéal pour les petits déjeuners, les voyages et les pauses. Format pratique et individuel. Qualité supérieure, 100% pur lait.",details:[{label:"Format",val:"100 sachets de 12g"},{label:"Poids total",val:"1,2 kg"},{label:"Qualité",val:"Supérieure"},{label:"Origine",val:"Importation directe"},{label:"Livraison",val:"Dakar et région"}]},
-{id:2,name:"MADILAIT - Carton 20g (100 sachets)",price:4500,img:IMG2,gallery:[IMG2,IMG3,IMG1],desc:"Carton de 100 sachets de 20g de lait en poudre MADILAIT. Format familial idéal pour les foyers nombreux. Riche en vitamines et minéraux essentiels. Qualité constante et goût authentique.",details:[{label:"Format",val:"100 sachets de 20g"},{label:"Poids total",val:"2 kg"},{label:"Qualité",val:"Supérieure"},{label:"Origine",val:"Importation directe"},{label:"Livraison",val:"Dakar et région"}]},
-{id:3,name:"MADILAIT - Carton 400g (10 sachets)",price:6500,img:IMG3,gallery:[IMG3,IMG1,IMG2],desc:"Carton de 10 sachets de 400g de lait en poudre MADILAIT. Format économique pour les familles et les petites boutiques. Lait en poudre de première qualité, onctueux et savoureux.",details:[{label:"Format",val:"10 sachets de 400g"},{label:"Poids total",val:"4 kg"},{label:"Qualité",val:"Supérieure"},{label:"Origine",val:"Importation directe"},{label:"Livraison",val:"Dakar et région"}]},
-{id:4,name:"MADILAIT - Sac 5kg",price:18500,img:IMG4,gallery:[IMG4,IMG5],desc:"Sac de 5kg de lait en poudre MADILAIT. Format grossiste idéal pour les boutiques, restaurants et collectivités. Qualité constante, prix compétitif. Economique et pratique.",details:[{label:"Poids",val:"5 kg"},{label:"Quantité min.",val:"3 sacs"},{label:"Qualité",val:"Supérieure"},{label:"Origine",val:"Importation directe"},{label:"Livraison",val:"Dakar et région"}]},
-{id:5,name:"MADILAIT - Sac 10kg",price:35000,img:IMG5,gallery:[IMG5,IMG4],desc:"Sac de 10kg de lait en poudre MADILAIT. Le meilleur rapport qualité-prix pour les gros consommateurs. Parfait pour les grossistes, les écoles et les grandes familles.",details:[{label:"Poids",val:"10 kg"},{label:"Quantité min.",val:"2 sacs"},{label:"Qualité",val:"Supérieure"},{label:"Origine",val:"Importation directe"},{label:"Livraison",val:"Dakar et région"}]}
+const products = [
+{
+id:1,name:"MADILAIT - Carton 12g (100 sachets)",price:3500,img:IMG1,gallery:[IMG1, IMG1B, IMG1C],
+desc:"Carton de 100 sachets de 12g de lait en poudre MADILAIT. Idéal pour les petits déjeuners, les voyages et les pauses. Format pratique et individuel. Qualité supérieure, 100% pur lait.",
+details:[{label:"Format",val:"100 sachets de 12g"},{label:"Poids total",val:"1,2 kg"},{label:"Qualité",val:"Supérieure"},{label:"Origine",val:"Importation directe"},{label:"Livraison",val:"Dakar et région"}]
+},
+{
+id:2,name:"MADILAIT - Carton 20g (100 sachets)",price:4500,img:IMG2,gallery:[IMG2, IMG2B, IMG2C],
+desc:"Carton de 100 sachets de 20g de lait en poudre MADILAIT. Format familial idéal pour les foyers nombreux. Riche en vitamines et minéraux essentiels. Qualité constante et goût authentique.",
+details:[{label:"Format",val:"100 sachets de 20g"},{label:"Poids total",val:"2 kg"},{label:"Qualité",val:"Supérieure"},{label:"Origine",val:"Importation directe"},{label:"Livraison",val:"Dakar et région"}]
+},
+{
+id:3,name:"MADILAIT - Carton 400g (10 sachets)",price:6500,img:IMG3,gallery:[IMG3, IMG3B, IMG3C],
+desc:"Carton de 10 sachets de 400g de lait en poudre MADILAIT. Format économique pour les familles et les petites boutiques. Lait en poudre de première qualité, onctueux et savoureux.",
+details:[{label:"Format",val:"10 sachets de 400g"},{label:"Poids total",val:"4 kg"},{label:"Qualité",val:"Supérieure"},{label:"Origine",val:"Importation directe"},{label:"Livraison",val:"Dakar et région"}]
+},
+{
+id:4,name:"MADILAIT - Sac 5kg",price:18500,img:IMG4,gallery:[IMG4, IMG4B],
+desc:"Sac de 5kg de lait en poudre MADILAIT. Format grossiste idéal pour les boutiques, restaurants et collectivités. Qualité constante, prix compétitif. Economique et pratique.",
+details:[{label:"Poids",val:"5 kg"},{label:"Quantité min.",val:"3 sacs"},{label:"Qualité",val:"Supérieure"},{label:"Origine",val:"Importation directe"},{label:"Livraison",val:"Dakar et région"}]
+},
+{
+id:5,name:"MADILAIT - Sac 10kg",price:35000,img:IMG5,gallery:[IMG5, IMG5B],
+desc:"Sac de 10kg de lait en poudre MADILAIT. Le meilleur rapport qualité-prix pour les gros consommateurs. Parfait pour les grossistes, les écoles et les grandes familles.",
+details:[{label:"Poids",val:"10 kg"},{label:"Quantité min.",val:"2 sacs"},{label:"Qualité",val:"Supérieure"},{label:"Origine",val:"Importation directe"},{label:"Livraison",val:"Dakar et région"}]
+}
 ];
 
 function formatPrice(p){return p.toString().replace(/\B(?=(\d{3})+(?!\d))/g," ")+" FCFA";}
