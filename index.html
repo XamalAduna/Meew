@@ -4,31 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Mewmi - Lait en poudre</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 <style>
 /* === DÉSACTIVATION DU ZOOM SUR TOUT LE SITE === */
 html, body{overflow-x:hidden;touch-action:pan-y pinch-zoom;}
 html{zoom:reset;}
 *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;max-width:100%;}
-body{background:#f5f5f5;color:#1a1a2e;overflow-x:hidden;display:flex;flex-direction:column;min-height:100vh;}
+body{background:#f5f5f5;color:#1a1a2e;overflow-x:hidden;}
 input, select, textarea, button{touch-action:manipulation;font-size:16px;}
-header{background:#1a4d8f;color:white;padding:18px 8%;display:flex;justify-content:space-between;align-items:center;position:fixed;top:0;left:0;right:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.15);border-bottom:3px solid #f5a623;height:85px;}
-.logo{font-size:34px;font-weight:900;color:#fff;letter-spacing:1px;display:flex;align-items:center;gap:8px;flex-shrink:0;cursor:pointer;font-family:'Playfair Display',serif;text-shadow:0 2px 4px rgba(0,0,0,0.2);}
-.logo .material-symbols-outlined{font-size:36px;color:#f5a623;}
-.logo span:last-child{background:linear-gradient(135deg,#fff,#f5a623);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-family:'Playfair Display',serif;}
+header{background:#1a4d8f;color:white;padding:18px 8%;display:flex;justify-content:space-between;align-items:center;position:fixed;top:0;left:0;right:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.15);border-bottom:3px solid #f5a623;height:70px;}
+.logo{font-size:28px;font-weight:900;color:#fff;letter-spacing:1px;display:flex;align-items:center;gap:8px;flex-shrink:0;cursor:pointer;font-family:'Poppins',sans-serif;text-shadow:0 2px 4px rgba(0,0,0,0.2);}
+.logo .material-symbols-outlined{font-size:30px;color:#f5a623;}
+.logo span:last-child{background:linear-gradient(135deg,#fff,#f5a623);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 nav{display:flex;align-items:center;gap:15px;flex-shrink:0;}
 nav a{color:#fff;text-decoration:none;margin-left:25px;}
 .cart-icon{position:relative;cursor:pointer;color:#fff;font-size:22px;margin-left:25px;background:rgba(255,255,255,0.15);border:none;padding:8px 12px;border-radius:50px;transition:.25s;display:flex;align-items:center;gap:6px;}
 .cart-icon:hover{background:rgba(255,255,255,0.3);transform:translateY(-2px);}
-.cart-icon .material-symbols-outlined{font-size:26px;}
+.cart-icon .material-symbols-outlined{font-size:22px;}
 .cart-badge{position:absolute;top:-8px;right:-8px;background:#f5a623;color:#1a1a2e;border-radius:50%;width:20px;height:20px;font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:bold;}
-#page-shop, #page-cart, #page-checkout, #page-detail{padding-top:95px;}
+#page-shop, #page-cart, #page-checkout, #page-detail{padding-top:80px;}
 #page-shop, #page-cart, #page-checkout, #page-detail{display:block;}
 #page-cart, #page-checkout, #page-detail{display:none;}
-footer{background:#1a4d8f;color:white;text-align:center;padding:15px;margin-top:60px;border-top:3px solid #f5a623;font-size:14px;flex-shrink:0;}
-footer p{margin:0;}
-footer .footer-contact{margin-top:4px;font-size:13px;color:#f5a623;}
+footer{background:#1a4d8f;color:white;text-align:center;padding:15px;margin-top:60px;border-top:3px solid #f5a623;font-size:14px;}
 .btn{background:linear-gradient(135deg,#f5a623,#e69500);padding:12px 30px;color:white;text-decoration:none;border-radius:50px;font-weight:bold;transition:.3s;cursor:pointer;border:none;font-size:15px;box-shadow:0 8px 22px rgba(245,166,35,.35);}
 .btn:hover{background:linear-gradient(135deg,#e69500,#cc7a00);transform:translateY(-3px);box-shadow:0 12px 28px rgba(245,166,35,.45);}
 .btn-secondary{padding:12px 25px;border:2px solid #1a4d8f;background:white;color:#1a4d8f;border-radius:50px;cursor:pointer;font-size:14px;font-weight:600;font-family:Poppins,sans-serif;transition:.3s;}
@@ -81,7 +79,7 @@ footer .footer-contact{margin-top:4px;font-size:13px;color:#f5a623;}
 .detail-actions .btn-back-detail:hover{transform:translateY(-2px);background:#0f3a6a;}
 @media(max-width:600px){.detail-gallery{height:300px;}.detail-info h2{font-size:22px;}.detail-info .detail-price{font-size:24px;}.detail-actions button{font-size:14px;padding:12px 16px;min-width:120px;}}
 @media(max-width:400px){.detail-gallery{height:220px;}}
-.container{width:90%;max-width:1200px;margin:40px auto;flex:1;}
+.container{width:90%;max-width:1200px;margin:40px auto;}
 .title{text-align:center;font-size:36px;font-weight:700;margin-bottom:18px;position:relative;color:#1a1a2e;}
 .title::after{content:'';display:block;width:70px;height:4px;background:linear-gradient(90deg,#f5a623,#e69500);border-radius:4px;margin:10px auto 0;}
 .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px;}
@@ -96,8 +94,8 @@ footer .footer-contact{margin-top:4px;font-size:13px;color:#f5a623;}
 .qty-btn{width:28px;height:28px;border:1px solid #ddd;background:white;border-radius:50%;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;}
 .qty-btn:hover{background:#f5a623;color:white;border-color:#f5a623;}
 .cart-item-total{font-weight:700;font-size:16px;min-width:60px;text-align:right;color:#1a1a2e;}
-.remove-btn{background:#e94560;border:none;color:white;cursor:pointer;font-size:12px;padding:6px 12px;border-radius:6px;font-weight:600;transition:.2s;font-family:Poppins,sans-serif;}
-.remove-btn:hover{background:#c0392b;transform:scale(1.05);}
+.remove-btn{background:none;border:none;color:#ccc;cursor:pointer;font-size:18px;padding:4px;}
+.remove-btn:hover{color:#f5a623;}
 .cart-summary{background:white;border-radius:14px;padding:25px;box-shadow:0 4px 15px rgba(0,0,0,.08);}
 .cart-summary h3{font-size:20px;margin-bottom:16px;color:#1a1a2e;}
 .summary-line{display:flex;justify-content:space-between;margin-bottom:10px;font-size:14px;}
@@ -138,7 +136,7 @@ footer .footer-contact{margin-top:4px;font-size:13px;color:#f5a623;}
 .card-carousel-dot.active{background:white;}
 .page-title{font-size:32px;text-align:center;margin-bottom:30px;color:#1a1a2e;}
 .phone-prefix{color:#555;font-weight:600;font-size:14px;padding-right:4px;flex-shrink:0;}
-@media(max-width:600px){header{padding:12px 4%;height:75px;}.logo{font-size:26px;}.logo .material-symbols-outlined{font-size:28px;}.container{width:94%;margin:25px auto;}.title{font-size:24px;margin-bottom:14px;}.page-title{font-size:22px;margin-bottom:20px;}.form-row{grid-template-columns:1fr;gap:0;}.cart-item{flex-wrap:wrap;padding:12px;gap:10px;}.cart-item-info{min-width:100px;}.cart-item-total{text-align:left;}.checkout-form,.order-recap{padding:16px;}.cart-summary{padding:16px;}.cart-actions{flex-direction:column;}.cart-actions button{width:100%;}.input-icon-wrapper{padding:0 10px;}.input-icon-wrapper .material-symbols-outlined{font-size:18px;}#page-shop,#page-cart,#page-checkout,#page-detail{padding-top:80px;}}
+@media(max-width:600px){header{padding:12px 4%;height:60px;}.logo{font-size:20px;}.logo .material-symbols-outlined{font-size:22px;}.container{width:94%;margin:25px auto;}.title{font-size:24px;margin-bottom:14px;}.page-title{font-size:22px;margin-bottom:20px;}.form-row{grid-template-columns:1fr;gap:0;}.cart-item{flex-wrap:wrap;padding:12px;gap:10px;}.cart-item-info{min-width:100px;}.cart-item-total{text-align:left;}.checkout-form,.order-recap{padding:16px;}.cart-summary{padding:16px;}.cart-actions{flex-direction:column;}.cart-actions button{width:100%;}.input-icon-wrapper{padding:0 10px;}.input-icon-wrapper .material-symbols-outlined{font-size:18px;}#page-shop,#page-cart,#page-checkout,#page-detail{padding-top:68px;}}
 @media(min-width:601px) and (max-width:768px){.products{grid-template-columns:repeat(2,1fr);gap:16px;}.container{width:94%;}}
 @media(max-width:500px){.products{grid-template-columns:repeat(2,1fr);gap:6px;}.container{width:96%;margin:18px auto;}.title{font-size:22px;margin-bottom:12px;}}
 </style>
@@ -149,7 +147,7 @@ footer .footer-contact{margin-top:4px;font-size:13px;color:#f5a623;}
 <div id="page-cart"><div class="container"><h2 class="page-title"><span class="material-symbols-outlined" style="font-size:28px;vertical-align:middle;">shopping_cart</span> Mon Panier</h2><div id="cart-content"></div></div></div>
 <div id="page-checkout"><div class="container"><h2 class="page-title"><span class="material-symbols-outlined" style="font-size:28px;vertical-align:middle;">assignment</span> Finaliser la commande</h2><div id="checkout-content"></div></div></div>
 <div id="page-detail"><div class="container"><div id="detail-content"></div></div></div>
-<footer><p>© 2026 Mewmi - Tous droits réservés.</p><p class="footer-contact">📞 +221 78 173 98 14</p></footer>
+<footer><p>© 2026 Mewmi - Tous droits réservés.</p></footer>
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import{getFirestore,collection,addDoc}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -158,62 +156,62 @@ const app=initializeApp(firebaseConfig);const db=getFirestore(app);
 window.db=db;window.collection=collection;window.addDoc=addDoc;console.log("Firebase initialisé avec succès");
 </script>
 <script>
-// ── IMAGES MADILAIT (plus de dossier te/) ──
+// ── IMAGES MADILAIT (dossier te/) ──
 // Carton 12g - 5 images
-const IMG1 = "IMG_9090.jpeg";
-const IMG1B = "IMG_9090.jpeg";
-const IMG1C = "IMG_9090.jpeg";
-const IMG1D = "IMG_9090.jpeg";
-const IMG1E = "IMG_9090.jpeg";
+const IMG1 = "te/Sachet_madilait_12g.jpeg";
+const IMG1B = "te/carton1_madilait_12g.jpeg";
+const IMG1C = "te/carton2_madilait_12g.jpeg";
+const IMG1D = "te/carton3_madilait_12g.jpeg";
+const IMG1E = "te/carton4_madilait_12g.jpeg";
 
 // Carton 20g - 5 images
-const IMG2 = "IMG_9090.jpeg";
-const IMG2B = "IMG_9090.jpeg";
-const IMG2C = "IMG_9090.jpeg";
-const IMG2D = "IMG_9090.jpeg";
-const IMG2E = "IMG_9090.jpeg";
+const IMG2 = "te/Sachet_madilait_400g.jpeg";
+const IMG2B = "te/carton1_madilait_400g.jpeg";
+const IMG2C = "te/carton2_madilait_400g.jpeg";
+const IMG2D = "te/carton3_madilait_400g.jpeg";
+const IMG2E = "te/carton4_madilait_400g.jpeg";
 
 // Carton 400g - 5 images
-const IMG3 = "IMG_9090.jpeg";
-const IMG3B = "IMG_9090.jpeg";
-const IMG3C = "IMG_9090.jpeg";
-const IMG3D = "IMG_9090.jpeg";
-const IMG3E = "IMG_9090.jpeg";
+const IMG3 = "te/madilait-400g-1.jpg";
+const IMG3B = "te/madilait-400g-2.jpg";
+const IMG3C = "te/madilait-400g-3.jpg";
+const IMG3D = "te/madilait-400g-4.jpg";
+const IMG3E = "te/madilait-400g-5.jpg";
 
 // Sac 5kg - 2 images
-const IMG4 = "IMG_9090.jpeg";
-const IMG4B = "IMG_9090.jpeg";
+const IMG4 = "te/madilait-5kg-1.jpg";
+const IMG4B = "te/madilait-5kg-2.jpg";
 
 // Sac 10kg - 2 images
-const IMG5 = "IMG_9090.jpeg";
-const IMG5B = "IMG_9090.jpeg";
+const IMG5 = "te/madilait-10kg-1.jpg";
+const IMG5B = "te/madilait-10kg-2.jpg";
 
 // ── PRODUITS MADILAIT ──
 const products = [
 {
 id:1,name:"MADILAIT - Carton 12g (100 sachets)",price:3500,img:IMG1,gallery:[IMG1, IMG1B, IMG1C, IMG1D, IMG1E],
-desc:"Carton de 100 sachets de 12g de lait en poudre MADILAIT. Idéal pour les petits déjeuners, les voyages et les pauses. Format pratique et individuel. Qualité supérieure.",
-details:[{label:"Format",val:"100 sachets de 12g"},{label:"Poids total",val:"1,2 kg"},{label:"Qualité",val:"Supérieure"},{label:"Livraison",val:"Dakar et région"}]
+desc:"Carton de 100 sachets de 12g de lait en poudre MADILAIT. Idéal pour les petits déjeuners, les voyages et les pauses. Format pratique et individuel. Qualité supérieure, 100% pur lait.",
+details:[{label:"Format",val:"100 sachets de 12g"},{label:"Poids total",val:"1,2 kg"},{label:"Qualité",val:"Supérieure"},{label:"Origine",val:"Importation directe"},{label:"Livraison",val:"Dakar et région"}]
 },
 {
 id:2,name:"MADILAIT - Carton 20g (100 sachets)",price:4500,img:IMG2,gallery:[IMG2, IMG2B, IMG2C, IMG2D, IMG2E],
 desc:"Carton de 100 sachets de 20g de lait en poudre MADILAIT. Format familial idéal pour les foyers nombreux. Riche en vitamines et minéraux essentiels. Qualité constante et goût authentique.",
-details:[{label:"Format",val:"100 sachets de 20g"},{label:"Poids total",val:"2 kg"},{label:"Qualité",val:"Supérieure"},{label:"Livraison",val:"Dakar et région"}]
+details:[{label:"Format",val:"100 sachets de 20g"},{label:"Poids total",val:"2 kg"},{label:"Qualité",val:"Supérieure"},{label:"Origine",val:"Importation directe"},{label:"Livraison",val:"Dakar et région"}]
 },
 {
 id:3,name:"MADILAIT - Carton 400g (10 sachets)",price:6500,img:IMG3,gallery:[IMG3, IMG3B, IMG3C, IMG3D, IMG3E],
 desc:"Carton de 10 sachets de 400g de lait en poudre MADILAIT. Format économique pour les familles et les petites boutiques. Lait en poudre de première qualité, onctueux et savoureux.",
-details:[{label:"Format",val:"10 sachets de 400g"},{label:"Poids total",val:"4 kg"},{label:"Qualité",val:"Supérieure"},{label:"Livraison",val:"Dakar et région"}]
+details:[{label:"Format",val:"10 sachets de 400g"},{label:"Poids total",val:"4 kg"},{label:"Qualité",val:"Supérieure"},{label:"Origine",val:"Importation directe"},{label:"Livraison",val:"Dakar et région"}]
 },
 {
 id:4,name:"MADILAIT - Sac 5kg",price:18500,img:IMG4,gallery:[IMG4, IMG4B],
 desc:"Sac de 5kg de lait en poudre MADILAIT. Format grossiste idéal pour les boutiques, restaurants et collectivités. Qualité constante, prix compétitif. Economique et pratique.",
-details:[{label:"Poids",val:"5 kg"},{label:"Quantité min.",val:"3 sacs"},{label:"Qualité",val:"Supérieure"},{label:"Livraison",val:"Dakar et région"}]
+details:[{label:"Poids",val:"5 kg"},{label:"Quantité min.",val:"3 sacs"},{label:"Qualité",val:"Supérieure"},{label:"Origine",val:"Importation directe"},{label:"Livraison",val:"Dakar et région"}]
 },
 {
 id:5,name:"MADILAIT - Sac 10kg",price:35000,img:IMG5,gallery:[IMG5, IMG5B],
 desc:"Sac de 10kg de lait en poudre MADILAIT. Le meilleur rapport qualité-prix pour les gros consommateurs. Parfait pour les grossistes, les écoles et les grandes familles.",
-details:[{label:"Poids",val:"10 kg"},{label:"Quantité min.",val:"2 sacs"},{label:"Qualité",val:"Supérieure"},{label:"Livraison",val:"Dakar et région"}]
+details:[{label:"Poids",val:"10 kg"},{label:"Quantité min.",val:"2 sacs"},{label:"Qualité",val:"Supérieure"},{label:"Origine",val:"Importation directe"},{label:"Livraison",val:"Dakar et région"}]
 }
 ];
 
@@ -230,12 +228,12 @@ function renderProducts(){const grid=document.getElementById('products-grid');gr
 // ── DETAIL PAGE ──
 let detailSlide=0;let detailGallery=[];
 function openDetail(id){const p=products.find(x=>x.id===id);detailGallery=p.gallery;detailSlide=0;document.getElementById('page-shop').style.display='none';document.getElementById('page-cart').style.display='none';document.getElementById('page-checkout').style.display='none';document.getElementById('page-detail').style.display='block';window.scrollTo({top:0,behavior:'smooth'});renderDetail(p);}
-function renderDetail(p){const slides=p.gallery.map(src=>'<img src="'+src+'" alt="'+p.name+'">').join('');const dots=p.gallery.map((_,i)=>'<button class="detail-gallery-dot'+(i===0?' active':'')+'" onclick="goToDetailSlide('+i+')"></button>').join('');document.getElementById('detail-content').innerHTML='<div class="detail-container"><div class="detail-header"><h2 style="font-size:28px;color:#1a1a2e;">'+p.name+'</h2><button class="btn-back" onclick="showPage(\'shop\')"><span class="material-symbols-outlined" style="font-size:20px;">arrow_back</span> Retour</button></div><div class="detail-gallery" id="detail-gallery"><div class="detail-gallery-track" id="detail-gallery-track">'+slides+'</div><button class="detail-gallery-btn prev" onclick="slideDetail(-1)">&#8592;</button><button class="detail-gallery-btn next" onclick="slideDetail(1)">&#8594;</button><div class="detail-gallery-dots">'+dots+'</div></div><div class="detail-info"><div class="detail-price">'+formatPrice(p.price)+'</div><p class="detail-desc">'+p.desc.replace('100% pur lait','')+'</p><div class="detail-specs"><h4>📋 Caractéristiques</h4><ul>'+p.details.filter(d=>d.label!=='Origine').map(d=>'<li><span>'+d.label+' :</span>'+d.val+'</li>').join('')+'</ul></div><div class="detail-actions"><button class="btn-add-cart" onclick="addToCart('+p.id+');this.textContent=\'✓ Ajouté au panier\';this.style.background=\'#27ae60\'">🛒 Ajouter au panier</button><button class="btn-back-detail" onclick="showPage(\'shop\')">← Retour à la boutique</button></div></div></div>';}
+function renderDetail(p){const slides=p.gallery.map(src=>'<img src="'+src+'" alt="'+p.name+'">').join('');const dots=p.gallery.map((_,i)=>'<button class="detail-gallery-dot'+(i===0?' active':'')+'" onclick="goToDetailSlide('+i+')"></button>').join('');document.getElementById('detail-content').innerHTML='<div class="detail-container"><div class="detail-header"><h2 style="font-size:28px;color:#1a1a2e;">'+p.name+'</h2><button class="btn-back" onclick="showPage(\'shop\')"><span class="material-symbols-outlined" style="font-size:20px;">arrow_back</span> Retour</button></div><div class="detail-gallery" id="detail-gallery"><div class="detail-gallery-track" id="detail-gallery-track">'+slides+'</div><button class="detail-gallery-btn prev" onclick="slideDetail(-1)">&#8592;</button><button class="detail-gallery-btn next" onclick="slideDetail(1)">&#8594;</button><div class="detail-gallery-dots">'+dots+'</div></div><div class="detail-info"><div class="detail-price">'+formatPrice(p.price)+'</div><p class="detail-desc">'+p.desc+'</p><div class="detail-specs"><h4>📋 Caractéristiques</h4><ul>'+p.details.map(d=>'<li><span>'+d.label+' :</span>'+d.val+'</li>').join('')+'</ul></div><div class="detail-actions"><button class="btn-add-cart" onclick="addToCart('+p.id+');this.textContent=\'✓ Ajouté au panier\';this.style.background=\'#27ae60\'">🛒 Ajouter au panier</button><button class="btn-back-detail" onclick="showPage(\'shop\')">← Retour à la boutique</button></div></div></div>';}
 function slideDetail(dir){detailSlide=(detailSlide+dir+detailGallery.length)%detailGallery.length;updateDetailCarousel();}
 function goToDetailSlide(i){detailSlide=i;updateDetailCarousel();}
 function updateDetailCarousel(){document.getElementById('detail-gallery-track').style.transform='translateX(-'+(detailSlide*100)+'%)';document.querySelectorAll('.detail-gallery-dot').forEach((d,i)=>d.classList.toggle('active',i===detailSlide));}
 function showPage(page){document.getElementById('page-shop').style.display='none';document.getElementById('page-cart').style.display='none';document.getElementById('page-checkout').style.display='none';document.getElementById('page-detail').style.display='none';if(page==='shop'){document.getElementById('page-shop').style.display='block';}else if(page==='cart'){document.getElementById('page-cart').style.display='block';renderCart();}else if(page==='checkout'){document.getElementById('page-checkout').style.display='block';renderCheckout();}window.scrollTo({top:0,behavior:'smooth'});}
-function renderCart(){const el=document.getElementById('cart-content');if(cart.length===0){el.innerHTML='<div class="cart-empty"><span class="material-symbols-outlined" style="font-size:50px;display:block;margin-bottom:12px;">shopping_cart</span>Votre panier est vide.<br><br><button class="btn" onclick="showPage(\'shop\')">Continuer les achats</button></div>';return;}const items=cart.map(item=>'<div class="cart-item"><img class="cart-item-img" src="'+item.img+'" alt="'+item.name+'"><div class="cart-item-info"><h4>'+item.name+'</h4><div class="item-price">'+formatPrice(item.price)+'</div></div><div class="cart-item-qty"><button class="qty-btn" onclick="changeQty('+item.id+',-1)">−</button><span>'+item.qty+'</span><button class="qty-btn" onclick="changeQty('+item.id+',1)">+</button></div><div class="cart-item-total">'+formatPrice(item.price*item.qty)+'</div><button class="remove-btn" onclick="removeFromCart('+item.id+')">Supprimer</button></div>').join('');const total=getCartTotal();el.innerHTML='<div class="cart-items">'+items+'</div><div class="cart-summary"><h3>Récapitulatif</h3><div class="summary-line"><span>Sous-total</span><span>'+formatPrice(total)+'</span></div><div class="summary-line"><span>Livraison</span><span>Gratuite</span></div><div class="summary-line total"><span>Total</span><span>'+formatPrice(total)+'</span></div><div class="cart-actions"><button class="btn-secondary" onclick="showPage(\'shop\')">← Continuer</button><button class="btn" onclick="showPage(\'checkout\')">Commander →</button></div></div>';}
+function renderCart(){const el=document.getElementById('cart-content');if(cart.length===0){el.innerHTML='<div class="cart-empty"><span class="material-symbols-outlined" style="font-size:50px;display:block;margin-bottom:12px;">shopping_cart</span>Votre panier est vide.<br><br><button class="btn" onclick="showPage(\'shop\')">Continuer les achats</button></div>';return;}const items=cart.map(item=>'<div class="cart-item"><img class="cart-item-img" src="'+item.img+'" alt="'+item.name+'"><div class="cart-item-info"><h4>'+item.name+'</h4><div class="item-price">'+formatPrice(item.price)+'</div></div><div class="cart-item-qty"><button class="qty-btn" onclick="changeQty('+item.id+',-1)">−</button><span>'+item.qty+'</span><button class="qty-btn" onclick="changeQty('+item.id+',1)">+</button></div><div class="cart-item-total">'+formatPrice(item.price*item.qty)+'</div><button class="remove-btn" onclick="removeFromCart('+item.id+')">🗑</button></div>').join('');const total=getCartTotal();el.innerHTML='<div class="cart-items">'+items+'</div><div class="cart-summary"><h3>Récapitulatif</h3><div class="summary-line"><span>Sous-total</span><span>'+formatPrice(total)+'</span></div><div class="summary-line"><span>Livraison</span><span>Gratuite</span></div><div class="summary-line total"><span>Total</span><span>'+formatPrice(total)+'</span></div><div class="cart-actions"><button class="btn-secondary" onclick="showPage(\'shop\')">← Continuer</button><button class="btn" onclick="showPage(\'checkout\')">Commander →</button></div></div>';}
 function changeQty(id,delta){const item=cart.find(x=>x.id===id);if(!item)return;item.qty+=delta;if(item.qty<=0)cart=cart.filter(x=>x.id!==id);updateBadge();renderCart();}
 function removeFromCart(id){cart=cart.filter(x=>x.id!==id);updateBadge();renderCart();}
 function formatPhone(input){let value=input.value.replace(/\D/g,'');if(value.length>9)value=value.slice(0,9);let formatted='';if(value.length>0){formatted=value.slice(0,2);if(value.length>2){formatted+=' '+value.slice(2,5);}if(value.length>5){formatted+=' '+value.slice(5,7);}if(value.length>7){formatted+=' '+value.slice(7,9);}}input.value=formatted;}
