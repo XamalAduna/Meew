@@ -155,9 +155,24 @@ footer{background:#1a4d8f;color:white;text-align:center;padding:15px;margin-top:
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import{getFirestore,collection,addDoc}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import{getAuth,signInAnonymously}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 const firebaseConfig={apiKey:"AIzaSyAfMvQeZT7vuWsQpCPA-H96C0qnJNJ19vA",authDomain:"sensold.firebaseapp.com",projectId:"sensold",storageBucket:"sensold.firebasestorage.app",messagingSenderId:"822299493463",appId:"1:822299493463:web:ad04ff5aef5e70b4340f12",measurementId:"G-JEGFMBSZ6H"};
-const app=initializeApp(firebaseConfig);const db=getFirestore(app);
-window.db=db;window.collection=collection;window.addDoc=addDoc;console.log("Firebase initialisé avec succès");
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+const auth=getAuth(app);
+
+window.db=db;
+window.collection=collection;
+window.addDoc=addDoc;
+window.auth=auth;
+
+signInAnonymously(auth)
+    .then(()=>{
+        console.log("Utilisateur anonyme connecté :",auth.currentUser.uid);
+    })
+    .catch(error=>{
+        console.error("Erreur d'authentification anonyme :",error);
+    });
 </script>
 <script>
 const IMG1 = "IMG_9816.jpeg";
