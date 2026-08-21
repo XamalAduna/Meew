@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr"> 
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -142,11 +142,16 @@ footer{background:#1a4d8f;color:white;text-align:center;padding:15px;margin-top:
 @media(max-width:600px){header{padding:12px 4%;height:60px;}.logo{font-size:24px;}.logo .material-symbols-outlined{font-size:28px;}.container{width:94%;margin:25px auto;}.title{font-size:24px;margin-bottom:14px;}.page-title{font-size:22px;margin-bottom:20px;}.form-row{grid-template-columns:1fr;gap:0;}.cart-item{flex-wrap:wrap;padding:12px;gap:10px;}.cart-item-info{min-width:100px;}.cart-item-total{text-align:left;}.checkout-form,.order-recap{padding:16px;}.cart-summary{padding:16px;}.cart-actions{flex-direction:column;}.cart-actions button{width:100%;}.input-icon-wrapper{padding:0 10px;}.input-icon-wrapper .material-symbols-outlined{font-size:18px;}#page-shop,#page-cart,#page-checkout,#page-detail{padding-top:68px;}}
 @media(min-width:601px) and (max-width:768px){.products{grid-template-columns:repeat(2,1fr);gap:16px;}.container{width:94%;}}
 @media(max-width:500px){.products{grid-template-columns:repeat(2,1fr);gap:6px;}.container{width:96%;margin:18px auto;}.title{font-size:22px;margin-bottom:12px;}}
+.notice-banner{background:#fff3cd;border-left:6px solid #f5a623;padding:14px 20px;margin:20px auto 10px auto;border-radius:10px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.notice-banner .material-symbols-outlined{color:#f5a623;font-size:32px;flex-shrink:0;}
+.notice-banner .notice-text{font-size:15px;color:#333;flex:1;}
+.notice-banner .notice-text strong{color:#1a4d8f;font-weight:700;}
+@media(max-width:600px){.notice-banner{padding:12px 16px;font-size:13px;gap:10px;}.notice-banner .material-symbols-outlined{font-size:26px;}}
 </style>
 </head>
 <body>
 <header><div class="logo" onclick="showPage('shop')"><span class="material-symbols-outlined">shopping_bag</span><span>Mewmi</span></div><nav><button class="cart-icon" onclick="showPage('cart')"><span class="material-symbols-outlined">shopping_cart</span><span class="cart-badge" id="cart-badge">0</span></button></nav></header>
-<div id="page-shop"><div class="container"><h2 class="title">Nos Produits</h2><div class="products" id="products-grid"></div></div></div>
+<div id="page-shop"><div class="container"><div class="notice-banner"><span class="material-symbols-outlined">info</span><span class="notice-text"><strong>🔥 Le lait MADILAIT en poudre</strong> est idéal pour faire du <strong>lait caillé (Sow)</strong> ! Parfait pour une fermentation réussie, il donne un goût authentique et une texture onctueuse. Essayez-le dès maintenant !</span></div><h2 class="title">Nos Produits</h2><div class="products" id="products-grid"></div></div></div>
 <div id="page-cart"><div class="container"><h2 class="page-title"><span class="material-symbols-outlined" style="font-size:28px;vertical-align:middle;">shopping_cart</span> Mon Panier</h2><div id="cart-content"></div></div></div>
 <div id="page-checkout"><div class="container"><h2 class="page-title"><span class="material-symbols-outlined" style="font-size:28px;vertical-align:middle;">assignment</span> Finaliser la commande</h2><div id="checkout-content"></div></div></div>
 <div id="page-detail"><div class="container"><div id="detail-content"></div></div></div>
@@ -159,28 +164,14 @@ import{getFirestore,collection,addDoc}from"https://www.gstatic.com/firebasejs/10
 import{getAuth,signInAnonymously}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 const firebaseConfig={apiKey:"AIzaSyAfMvQeZT7vuWsQpCPA-H96C0qnJNJ19vA",authDomain:"sensold.firebaseapp.com",projectId:"sensold",storageBucket:"sensold.firebasestorage.app",messagingSenderId:"822299493463",appId:"1:822299493463:web:ad04ff5aef5e70b4340f12",measurementId:"G-JEGFMBSZ6H"};
 const app=initializeApp(firebaseConfig);
-
-// Firebase App Check avec reCAPTCHA Enterprise
-const appCheck=initializeAppCheck(app,{
-    provider:new ReCaptchaEnterpriseProvider("6Lc23egrAAAAAP_O7sBdY2c4QiSa4rs2Vng_jn8z"),
-    isTokenAutoRefreshEnabled:true
-});
-
+const appCheck=initializeAppCheck(app,{provider:new ReCaptchaEnterpriseProvider("6Lc23egrAAAAAP_O7sBdY2c4QiSa4rs2Vng_jn8z"),isTokenAutoRefreshEnabled:true});
 const db=getFirestore(app);
 const auth=getAuth(app);
-
 window.db=db;
 window.collection=collection;
 window.addDoc=addDoc;
 window.auth=auth;
-
-signInAnonymously(auth)
-    .then(()=>{
-        console.log("Utilisateur anonyme connecté :",auth.currentUser.uid);
-    })
-    .catch(error=>{
-        console.error("Erreur d'authentification anonyme :",error);
-    });
+signInAnonymously(auth).then(()=>{console.log("Utilisateur anonyme connecté :",auth.currentUser.uid);}).catch(error=>{console.error("Erreur d'authentification anonyme :",error);});
 </script>
 <script>
 const IMG1 = "IMG_9816.jpeg";
@@ -188,53 +179,27 @@ const IMG1B = "IMG_9830.jpeg";
 const IMG1C = "IMG_9828.jpeg";
 const IMG1D = "IMG_9826.jpeg";
 const IMG1E = "IMG_9824.jpeg";
-
 const IMG2 = "B39DC742-328B-44A1-9376-CD393E47F862.jpeg";
 const IMG2B = "8F1D55A8-B98F-4E0E-A968-3F77863B3981.png";
 const IMG2C = "6F710F04-45A3-40D6-8696-B3DD2D78FB45.png";
 const IMG2D = "647E3DA1-06B9-44B2-A9D2-AE8EB1C7D396.png";
 const IMG2E = "IMG_9824.jpeg";
-
 const IMG3 = "IMG_9757.jpeg";
 const IMG3B = "IMG_9749.jpeg";
 const IMG3C = "IMG_9743.jpeg";
 const IMG3D = "IMG_9742.jpeg";
 const IMG3E = "IMG_9741.jpeg";
-
 const IMG4 = "IMG_9762.jpeg";
 const IMG4B = "IMG_9763.jpeg";
-
 const IMG5 = "7A5FCD54-2BD6-4916-A99B-9CC768FCD981.jpeg";
 const IMG5B = "IMG_9763.jpeg";
-
 const products = [
-{
-id:1,name:"MADILAIT - Carton 12g (100 sachets)",price:4000,img:IMG1,gallery:[IMG1, IMG1B, IMG1C, IMG1D, IMG1E],
-desc:"Carton de 100 sachets de 12g de lait en poudre MADILAIT. Idéal pour les petits déjeuners, les voyages et les pauses. Format pratique et individuel. Qualité supérieure.",
-details:[{label:"Format",val:"100 sachets de 12g"},{label:"Poids total",val:"1,2 kg"},{label:"Qualité",val:"Supérieure"},{label:"Livraison",val:"Dakar et région"}]
-},
-{
-id:2,name:"MADILAIT - Carton 20g (100 sachets)",price:7000,img:IMG2,gallery:[IMG2, IMG2B, IMG2C, IMG2D, IMG2E],
-desc:"Carton de 100 sachets de 20g de lait en poudre MADILAIT. Format familial idéal pour les foyers nombreux. Riche en vitamines et minéraux essentiels. Qualité constante et goût authentique.",
-details:[{label:"Format",val:"100 sachets de 20g"},{label:"Poids total",val:"2 kg"},{label:"Qualité",val:"Supérieure"},{label:"Livraison",val:"Dakar et région"}]
-},
-{
-id:3,name:"MADILAIT - Carton 400g (10 sachets)",price:12000,img:IMG3,gallery:[IMG3, IMG3B, IMG3C, IMG3D, IMG3E],
-desc:"Carton de 10 sachets de 400g de lait en poudre MADILAIT. Format économique pour les familles et les petites boutiques. Lait en poudre de première qualité, onctueux et savoureux.",
-details:[{label:"Format",val:"10 sachets de 400g"},{label:"Poids total",val:"4 kg"},{label:"Qualité",val:"Supérieure"},{label:"Livraison",val:"Dakar et région"}]
-},
-{
-id:4,name:"MADILAIT - Sac 5kg",price:12500,img:IMG4,gallery:[IMG4, IMG4B],
-desc:"Sac de 5kg de lait en poudre MADILAIT. Format grossiste idéal pour les boutiques, restaurants et collectivités. Qualité constante, prix compétitif. Economique et pratique.",
-details:[{label:"Poids",val:"5 kg"},{label:"Quantité min.",val:"3 sacs"},{label:"Qualité",val:"Supérieure"},{label:"Livraison",val:"Dakar et région"}]
-},
-{
-id:5,name:"MADILAIT - Sac 10kg",price:23500,img:IMG5,gallery:[IMG5, IMG5B],
-desc:"Sac de 10kg de lait en poudre MADILAIT. Le meilleur rapport qualité-prix pour les gros consommateurs. Parfait pour les grossistes, les écoles et les grandes familles.",
-details:[{label:"Poids",val:"10 kg"},{label:"Quantité min.",val:"2 sacs"},{label:"Qualité",val:"Supérieure"},{label:"Livraison",val:"Dakar et région"}]
-}
+{id:1,name:"MADILAIT - Carton 12g (100 sachets)",price:4000,img:IMG1,gallery:[IMG1, IMG1B, IMG1C, IMG1D, IMG1E],desc:"Carton de 100 sachets de 12g de lait en poudre MADILAIT. Idéal pour les petits déjeuners, les voyages et les pauses. Format pratique et individuel. Qualité supérieure.",details:[{label:"Format",val:"100 sachets de 12g"},{label:"Poids total",val:"1,2 kg"},{label:"Qualité",val:"Supérieure"},{label:"Livraison",val:"Dakar et région"}]},
+{id:2,name:"MADILAIT - Carton 20g (100 sachets)",price:7000,img:IMG2,gallery:[IMG2, IMG2B, IMG2C, IMG2D, IMG2E],desc:"Carton de 100 sachets de 20g de lait en poudre MADILAIT. Format familial idéal pour les foyers nombreux. Riche en vitamines et minéraux essentiels. Qualité constante et goût authentique.",details:[{label:"Format",val:"100 sachets de 20g"},{label:"Poids total",val:"2 kg"},{label:"Qualité",val:"Supérieure"},{label:"Livraison",val:"Dakar et région"}]},
+{id:3,name:"MADILAIT - Carton 400g (10 sachets)",price:12000,img:IMG3,gallery:[IMG3, IMG3B, IMG3C, IMG3D, IMG3E],desc:"Carton de 10 sachets de 400g de lait en poudre MADILAIT. Format économique pour les familles et les petites boutiques. Lait en poudre de première qualité, onctueux et savoureux.",details:[{label:"Format",val:"10 sachets de 400g"},{label:"Poids total",val:"4 kg"},{label:"Qualité",val:"Supérieure"},{label:"Livraison",val:"Dakar et région"}]},
+{id:4,name:"MADILAIT - Sac 5kg",price:12500,img:IMG4,gallery:[IMG4, IMG4B],desc:"Sac de 5kg de lait en poudre MADILAIT. Format grossiste idéal pour les boutiques, restaurants et collectivités. Qualité constante, prix compétitif. Economique et pratique.",details:[{label:"Poids",val:"5 kg"},{label:"Quantité min.",val:"3 sacs"},{label:"Qualité",val:"Supérieure"},{label:"Livraison",val:"Dakar et région"}]},
+{id:5,name:"MADILAIT - Sac 10kg",price:23500,img:IMG5,gallery:[IMG5, IMG5B],desc:"Sac de 10kg de lait en poudre MADILAIT. Le meilleur rapport qualité-prix pour les gros consommateurs. Parfait pour les grossistes, les écoles et les grandes familles.",details:[{label:"Poids",val:"10 kg"},{label:"Quantité min.",val:"2 sacs"},{label:"Qualité",val:"Supérieure"},{label:"Livraison",val:"Dakar et région"}]}
 ];
-
 function formatPrice(p){return p.toString().replace(/\B(?=(\d{3})+(?!\d))/g," ")+" FCFA";}
 let cart=[];const cardSlides={};
 function getCartCount(){return cart.reduce((s,i)=>s+i.qty,0);}
@@ -252,38 +217,31 @@ function slideDetail(dir){detailSlide=(detailSlide+dir+detailGallery.length)%det
 function goToDetailSlide(i){detailSlide=i;updateDetailCarousel();}
 function updateDetailCarousel(){document.getElementById('detail-gallery-track').style.transform='translateX(-'+(detailSlide*100)+'%)';document.querySelectorAll('.detail-gallery-dot').forEach((d,i)=>d.classList.toggle('active',i===detailSlide));}
 function showPage(page){document.getElementById('page-shop').style.display='none';document.getElementById('page-cart').style.display='none';document.getElementById('page-checkout').style.display='none';document.getElementById('page-detail').style.display='none';if(page==='shop'){document.getElementById('page-shop').style.display='block';}else if(page==='cart'){document.getElementById('page-cart').style.display='block';renderCart();}else if(page==='checkout'){document.getElementById('page-checkout').style.display='block';renderCheckout();}window.scrollTo({top:0,behavior:'smooth'});}
-function renderCart(){const el=document.getElementById('cart-content');if(cart.length===0){el.innerHTML='<div class="cart-empty"><span class="material-symbols-outlined" style="font-size:50px;display:block;margin-bottom:12px;">shopping_cart</span>Votre panier est vide.<br><br><button class="btn" onclick="showPage(\'shop\')">Continuer les achats</button></div>';return;}const items=cart.map(item=>'<div class="cart-item"><img class="cart-item-img" src="'+item.img+'" alt="'+item.name+'"><div class="cart-item-info"><h4>'+item.name+'</h4><div class="item-price">'+formatPrice(item.price)+'</div></div><div class="cart-item-qty"><button class="qty-btn" onclick="changeQty('+item.id+',-1)">−</button><span>'+item.qty+'</span><button class="qty-btn" onclick="changeQty('+item.id+',1)">+</button></div><div class="cart-item-total">'+formatPrice(item.price*item.qty)+'</div><button class="remove-btn" onclick="removeFromCart('+item.id+')">Supprimer</button></div>').join('');const total=getCartTotal();el.innerHTML='<div class="cart-items">'+items+'</div><div class="cart-summary"><h3>Récapitulatif</h3><div class="summary-line"><span>Sous-total</span><span>'+formatPrice(total)+'</span></div><div class="summary-line"><span>Livraison</span><span>Gratuite</span></div><div class="summary-line total"><span>Total</span><span>'+formatPrice(total)+'</span></div><div class="cart-actions"><button class="btn-secondary" onclick="showPage(\'shop\')">← Continuer</button><button class="btn" onclick="showPage(\'checkout\')">Commander →</button></div></div>';}
+function renderCart(){const el=document.getElementById('cart-content');if(cart.length===0){el.innerHTML='<div class="cart-empty"><span class="material-symbols-outlined" style="font-size:50px;display:block;margin-bottom:12px;">shopping_cart</span>Votre panier est vide.<br><br><button class="btn" onclick="showPage(\'shop\')">Continuer les achats</button></div>';return;}const items=cart.map(item=>'<div class="cart-item"><img class="cart-item-img" src="'+item.img+'" alt="'+item.name+'"><div class="cart-item-info"><h4>'+item.name+'</h4><div class="item-price">'+formatPrice(item.price)+'</div></div><div class="cart-item-qty"><button class="qty-btn" onclick="changeQty('+item.id+',-1)">−</button><span>'+item.qty+'</span><button class="qty-btn" onclick="changeQty('+item.id+',1)">+</button></div><div class="cart-item-total">'+formatPrice(item.price*item.qty)+'</div><button class="remove-btn" onclick="removeFromCart('+item.id+')">Supprimer</button></div>').join('');const total=getCartTotal();const shippingCost = total >= 25000 ? 0 : 1500; const totalWithShipping = total + shippingCost; el.innerHTML='<div class="cart-items">'+items+'</div><div class="cart-summary"><h3>Récapitulatif</h3><div class="summary-line"><span>Sous-total</span><span>'+formatPrice(total)+'</span></div><div class="summary-line"><span>Livraison</span><span>'+(shippingCost === 0 ? 'Gratuite' : formatPrice(shippingCost))+'</span></div><div class="summary-line total"><span>Total</span><span>'+formatPrice(totalWithShipping)+'</span></div><div class="cart-actions"><button class="btn-secondary" onclick="showPage(\'shop\')">← Continuer</button><button class="btn" onclick="showPage(\'checkout\')">Commander →</button></div></div>';}
 function changeQty(id,delta){const item=cart.find(x=>x.id===id);if(!item)return;item.qty+=delta;if(item.qty<=0)cart=cart.filter(x=>x.id!==id);updateBadge();renderCart();}
 function removeFromCart(id){cart=cart.filter(x=>x.id!==id);updateBadge();renderCart();}
 function formatPhone(input){let value=input.value.replace(/\D/g,'');if(value.length>9)value=value.slice(0,9);let formatted='';if(value.length>0){formatted=value.slice(0,2);if(value.length>2){formatted+=' '+value.slice(2,5);}if(value.length>5){formatted+=' '+value.slice(5,7);}if(value.length>7){formatted+=' '+value.slice(7,9);}}input.value=formatted;}
-function renderCheckout(){const total=getCartTotal();const recapItems=cart.map(i=>'<div class="recap-item"><span>'+i.name+' ×'+i.qty+'</span><span>'+formatPrice(i.price*i.qty)+'</span></div>').join('');document.getElementById('checkout-content').innerHTML='<div class="checkout-grid"><div><div class="checkout-form"><h3><span class="material-symbols-outlined" style="font-size:20px;vertical-align:middle;">local_shipping</span> Informations de livraison</h3><div class="form-row"><div class="form-group"><label>Prénom</label><div class="input-icon-wrapper"><span class="material-symbols-outlined">person</span><input type="text" id="prenom" placeholder="Jean" required></div><div class="error-message" id="prenom-error">Veuillez entrer votre prénom</div></div><div class="form-group"><label>Nom</label><div class="input-icon-wrapper"><span class="material-symbols-outlined">badge</span><input type="text" id="nom" placeholder="Dupont" required></div><div class="error-message" id="nom-error">Veuillez entrer votre nom</div></div></div><div class="form-group"><label>Téléphone principal <span style="color:#e94560;">*</span></label><div class="input-icon-wrapper"><span class="material-symbols-outlined">call</span><span class="phone-prefix">+221</span><input type="text" id="telephone" placeholder="7X 123 45 67" required oninput="formatPhone(this)" maxlength="12"></div><div class="error-message" id="telephone-error">Veuillez entrer un numéro valide (ex: 7X 123 45 67)</div></div><div class="form-group"><label>Téléphone secondaire</label><div class="input-icon-wrapper"><span class="material-symbols-outlined">call_missed</span><span class="phone-prefix">+221</span><input type="text" id="telephone2" placeholder="7X 123 45 67 (optionnel)" oninput="formatPhone(this)" maxlength="12"></div><div class="error-message" id="telephone2-error">Format invalide</div></div><div class="form-group"><label>Adresse de livraison <span style="color:#e94560;">*</span></label><div class="input-icon-wrapper"><span class="material-symbols-outlined">location_on</span><input type="text" id="adresse_livraison" placeholder="Pikine / Marché Zinc" required></div><div class="error-message" id="adresse_livraison-error">Veuillez entrer votre adresse de livraison</div></div></div></div><div class="order-recap"><h3><span class="material-symbols-outlined" style="font-size:18px;vertical-align:middle;">receipt_long</span> Votre commande</h3>'+recapItems+'<div class="recap-item"><span>Livraison</span><span>Gratuite</span></div><div class="recap-item" style="font-weight:700;font-size:15px;margin-top:8px;border-top:2px solid #eee;padding-top:12px"><span>Total</span><span>'+formatPrice(total)+'</span></div><button class="btn confirm-btn" onclick="confirmOrder()">✅ Confirmer la commande</button><button class="btn-secondary" style="width:100%;margin-top:8px;text-align:center" onclick="showPage(\'cart\')">← Retour au panier</button></div></div>';}
+function renderCheckout(){const total=getCartTotal();const shippingCost = total >= 25000 ? 0 : 1500; const totalWithShipping = total + shippingCost; const recapItems=cart.map(i=>'<div class="recap-item"><span>'+i.name+' ×'+i.qty+'</span><span>'+formatPrice(i.price*i.qty)+'</span></div>').join('');document.getElementById('checkout-content').innerHTML='<div class="checkout-grid"><div><div class="checkout-form"><h3><span class="material-symbols-outlined" style="font-size:20px;vertical-align:middle;">local_shipping</span> Informations de livraison</h3><div class="form-row"><div class="form-group"><label>Prénom</label><div class="input-icon-wrapper"><span class="material-symbols-outlined">person</span><input type="text" id="prenom" placeholder="Jean" required></div><div class="error-message" id="prenom-error">Veuillez entrer votre prénom</div></div><div class="form-group"><label>Nom</label><div class="input-icon-wrapper"><span class="material-symbols-outlined">badge</span><input type="text" id="nom" placeholder="Dupont" required></div><div class="error-message" id="nom-error">Veuillez entrer votre nom</div></div></div><div class="form-group"><label>Téléphone principal <span style="color:#e94560;">*</span></label><div class="input-icon-wrapper"><span class="material-symbols-outlined">call</span><span class="phone-prefix">+221</span><input type="text" id="telephone" placeholder="7X 123 45 67" required oninput="formatPhone(this)" maxlength="12"></div><div class="error-message" id="telephone-error">Veuillez entrer un numéro valide (ex: 7X 123 45 67)</div></div><div class="form-group"><label>Téléphone secondaire</label><div class="input-icon-wrapper"><span class="material-symbols-outlined">call_missed</span><span class="phone-prefix">+221</span><input type="text" id="telephone2" placeholder="7X 123 45 67 (optionnel)" oninput="formatPhone(this)" maxlength="12"></div><div class="error-message" id="telephone2-error">Format invalide</div></div><div class="form-group"><label>Adresse de livraison <span style="color:#e94560;">*</span></label><div class="input-icon-wrapper"><span class="material-symbols-outlined">location_on</span><input type="text" id="adresse_livraison" placeholder="Pikine / Marché Zinc" required></div><div class="error-message" id="adresse_livraison-error">Veuillez entrer votre adresse de livraison</div></div></div></div><div class="order-recap"><h3><span class="material-symbols-outlined" style="font-size:18px;vertical-align:middle;">receipt_long</span> Votre commande</h3>'+recapItems+'<div class="recap-item"><span>Livraison</span><span>'+(shippingCost === 0 ? 'Gratuite' : formatPrice(shippingCost))+'</span></div><div class="recap-item" style="font-weight:700;font-size:15px;margin-top:8px;border-top:2px solid #eee;padding-top:12px"><span>Total</span><span>'+formatPrice(totalWithShipping)+'</span></div><button class="btn confirm-btn" onclick="confirmOrder()">✅ Confirmer la commande</button><button class="btn-secondary" style="width:100%;margin-top:8px;text-align:center" onclick="showPage(\'cart\')">← Retour au panier</button></div></div>';}
 async function confirmOrder() {
     const prenom = document.getElementById('prenom');
     const nom = document.getElementById('nom');
     const telephone = document.getElementById('telephone');
     const telephone2 = document.getElementById('telephone2');
     const adresseLivraison = document.getElementById('adresse_livraison');
-
     let isValid = true;
-
-    // Vérifier que Firebase Auth est prêt
     if (!window.auth || !window.auth.currentUser) {
         alert("La connexion sécurisée n'est pas encore prête. Veuillez patienter quelques secondes puis réessayer.");
         return;
     }
-
-    // Vérification des champs obligatoires
     const requiredFields = [
         { el: prenom, error: 'prenom-error' },
         { el: nom, error: 'nom-error' },
         { el: telephone, error: 'telephone-error' },
         { el: adresseLivraison, error: 'adresse_livraison-error' }
     ];
-
     requiredFields.forEach(field => {
         const value = field.el.value.trim();
         const errorEl = document.getElementById(field.error);
-
         if (!value) {
             field.el.classList.add('error');
             if (errorEl) errorEl.style.display = 'block';
@@ -293,10 +251,7 @@ async function confirmOrder() {
             if (errorEl) errorEl.style.display = 'none';
         }
     });
-
-    // Vérification du téléphone principal
     const phoneDigits = telephone.value.replace(/\D/g, '');
-
     if (phoneDigits.length !== 9) {
         telephone.classList.add('error');
         document.getElementById('telephone-error').style.display = 'block';
@@ -305,11 +260,8 @@ async function confirmOrder() {
         telephone.classList.remove('error');
         document.getElementById('telephone-error').style.display = 'none';
     }
-
-    // Vérification du téléphone secondaire
     if (telephone2.value.trim()) {
         const phone2Digits = telephone2.value.replace(/\D/g, '');
-
         if (phone2Digits.length !== 9) {
             telephone2.classList.add('error');
             document.getElementById('telephone2-error').style.display = 'block';
@@ -319,54 +271,40 @@ async function confirmOrder() {
             document.getElementById('telephone2-error').style.display = 'none';
         }
     }
-
     if (!isValid) {
         const firstError = document.querySelector('.error');
-
         if (firstError) {
             firstError.focus();
         }
-
         return;
     }
-
-    // Vérifier que le panier existe
     if (!Array.isArray(cart) || cart.length === 0) {
         alert("Votre panier est vide.");
         showPage('cart');
         return;
     }
-
-    // Vérifier les produits et les quantités
     const produitsValides = cart.every(item => {
         return products.some(product => product.id === item.id)
             && Number.isInteger(item.qty)
             && item.qty > 0
             && item.qty <= 1000;
     });
-
     if (!produitsValides) {
         alert("Une erreur est survenue avec votre panier. Veuillez recommencer.");
-
         cart = [];
         updateBadge();
         showPage('shop');
-
         return;
     }
-
-    // Recalculer le total à partir du catalogue
     const totalCalcule = cart.reduce((total, item) => {
         const product = products.find(p => p.id === item.id);
-
         if (!product) {
             return total;
         }
-
         return total + (product.price * item.qty);
     }, 0);
-
-    // Vérification du montant
+    const shippingCost = totalCalcule >= 25000 ? 0 : 1500;
+    const totalWithShipping = totalCalcule + shippingCost;
     if (
         !Number.isFinite(totalCalcule) ||
         totalCalcule < 0 ||
@@ -375,11 +313,8 @@ async function confirmOrder() {
         alert("Montant de commande invalide.");
         return;
     }
-
-    // Préparer les détails des produits
     const produitsDetail = cart.map(item => {
         const product = products.find(p => p.id === item.id);
-
         return {
             id: product.id,
             nom: product.name,
@@ -388,75 +323,48 @@ async function confirmOrder() {
             total: product.price * item.qty
         };
     });
-
-    // Liste des produits
     const produitsListe = cart
         .map(item => {
             const product = products.find(p => p.id === item.id);
-
             return product.name + " (x" + item.qty + ")";
         })
         .join(', ');
-
-    // Données de la commande
     const orderData = {
         prenom: prenom.value.trim().slice(0, 50),
         nom: nom.value.trim().slice(0, 50),
-
         telephone: phoneDigits,
-
         telephone_secondaire: telephone2.value
             ? telephone2.value.replace(/\D/g, '')
             : '',
-
         adresse_livraison: adresseLivraison.value
             .trim()
             .slice(0, 300),
-
         produits: produitsListe.slice(0, 2000),
-
         produits_detail: produitsDetail,
-
-        total_commande: totalCalcule,
-
+        total_commande: totalWithShipping,
         date_commande: new Date().toISOString()
     };
-
     try {
         const { db, collection, addDoc, auth } = window;
-
-        // Vérification finale de l'authentification
         if (!auth.currentUser) {
             throw new Error("Utilisateur non authentifié.");
         }
-
-        // Empêcher les doubles clics
         const confirmButton = document.querySelector('.confirm-btn');
-
         if (confirmButton) {
             confirmButton.disabled = true;
             confirmButton.textContent = "Enregistrement...";
         }
-
-        // Enregistrer la commande dans Firestore
         const docRef = await addDoc(
             collection(db, "annonces"),
             orderData
         );
-
         console.log("Commande enregistrée :", docRef.id);
-
-        // Vider le panier
         cart = [];
         updateBadge();
-
-        // Afficher la confirmation
         document.getElementById('checkout-content').innerHTML = `
             <div class="success-screen">
                 <div class="check">✅</div>
-
                 <h2>Commande confirmée !</h2>
-
                 <p>
                     Merci pour votre achat.
                     Votre commande a été enregistrée.
@@ -464,24 +372,18 @@ async function confirmOrder() {
                     Livraison estimée :
                     <strong>3 à 5 jours ouvrés</strong>.
                 </p>
-
                 <button class="btn" onclick="showPage('shop')">
                     Retour à la boutique
                 </button>
             </div>
         `;
-
     } catch (error) {
-
         console.error("Erreur commande :", error);
-
         const confirmButton = document.querySelector('.confirm-btn');
-
         if (confirmButton) {
             confirmButton.disabled = false;
             confirmButton.textContent = "✅ Confirmer la commande";
         }
-
         alert(
             "Impossible d'enregistrer la commande. " +
             "Veuillez vérifier votre connexion puis réessayer."
