@@ -154,10 +154,18 @@ footer{background:#1a4d8f;color:white;text-align:center;padding:15px;margin-top:
 <footer><p>© 2026 Mewmi - Tous droits réservés.</p></footer>
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import{initializeAppCheck,ReCaptchaEnterpriseProvider}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app-check.js";
 import{getFirestore,collection,addDoc}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import{getAuth,signInAnonymously}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 const firebaseConfig={apiKey:"AIzaSyAfMvQeZT7vuWsQpCPA-H96C0qnJNJ19vA",authDomain:"sensold.firebaseapp.com",projectId:"sensold",storageBucket:"sensold.firebasestorage.app",messagingSenderId:"822299493463",appId:"1:822299493463:web:ad04ff5aef5e70b4340f12",measurementId:"G-JEGFMBSZ6H"};
 const app=initializeApp(firebaseConfig);
+
+// Firebase App Check avec reCAPTCHA Enterprise
+const appCheck=initializeAppCheck(app,{
+    provider:new ReCaptchaEnterpriseProvider("6Lc23egrAAAAAP_O7sBdY2c4QiSa4rs2Vng_jn8z"),
+    isTokenAutoRefreshEnabled:true
+});
+
 const db=getFirestore(app);
 const auth=getAuth(app);
 
