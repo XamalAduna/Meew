@@ -257,7 +257,237 @@ function changeQty(id,delta){const item=cart.find(x=>x.id===id);if(!item)return;
 function removeFromCart(id){cart=cart.filter(x=>x.id!==id);updateBadge();renderCart();}
 function formatPhone(input){let value=input.value.replace(/\D/g,'');if(value.length>9)value=value.slice(0,9);let formatted='';if(value.length>0){formatted=value.slice(0,2);if(value.length>2){formatted+=' '+value.slice(2,5);}if(value.length>5){formatted+=' '+value.slice(5,7);}if(value.length>7){formatted+=' '+value.slice(7,9);}}input.value=formatted;}
 function renderCheckout(){const total=getCartTotal();const recapItems=cart.map(i=>'<div class="recap-item"><span>'+i.name+' ×'+i.qty+'</span><span>'+formatPrice(i.price*i.qty)+'</span></div>').join('');document.getElementById('checkout-content').innerHTML='<div class="checkout-grid"><div><div class="checkout-form"><h3><span class="material-symbols-outlined" style="font-size:20px;vertical-align:middle;">local_shipping</span> Informations de livraison</h3><div class="form-row"><div class="form-group"><label>Prénom</label><div class="input-icon-wrapper"><span class="material-symbols-outlined">person</span><input type="text" id="prenom" placeholder="Jean" required></div><div class="error-message" id="prenom-error">Veuillez entrer votre prénom</div></div><div class="form-group"><label>Nom</label><div class="input-icon-wrapper"><span class="material-symbols-outlined">badge</span><input type="text" id="nom" placeholder="Dupont" required></div><div class="error-message" id="nom-error">Veuillez entrer votre nom</div></div></div><div class="form-group"><label>Téléphone principal <span style="color:#e94560;">*</span></label><div class="input-icon-wrapper"><span class="material-symbols-outlined">call</span><span class="phone-prefix">+221</span><input type="text" id="telephone" placeholder="7X 123 45 67" required oninput="formatPhone(this)" maxlength="12"></div><div class="error-message" id="telephone-error">Veuillez entrer un numéro valide (ex: 7X 123 45 67)</div></div><div class="form-group"><label>Téléphone secondaire</label><div class="input-icon-wrapper"><span class="material-symbols-outlined">call_missed</span><span class="phone-prefix">+221</span><input type="text" id="telephone2" placeholder="7X 123 45 67 (optionnel)" oninput="formatPhone(this)" maxlength="12"></div><div class="error-message" id="telephone2-error">Format invalide</div></div><div class="form-group"><label>Adresse de livraison <span style="color:#e94560;">*</span></label><div class="input-icon-wrapper"><span class="material-symbols-outlined">location_on</span><input type="text" id="adresse_livraison" placeholder="Pikine / Marché Zinc" required></div><div class="error-message" id="adresse_livraison-error">Veuillez entrer votre adresse de livraison</div></div></div></div><div class="order-recap"><h3><span class="material-symbols-outlined" style="font-size:18px;vertical-align:middle;">receipt_long</span> Votre commande</h3>'+recapItems+'<div class="recap-item"><span>Livraison</span><span>Gratuite</span></div><div class="recap-item" style="font-weight:700;font-size:15px;margin-top:8px;border-top:2px solid #eee;padding-top:12px"><span>Total</span><span>'+formatPrice(total)+'</span></div><button class="btn confirm-btn" onclick="confirmOrder()">✅ Confirmer la commande</button><button class="btn-secondary" style="width:100%;margin-top:8px;text-align:center" onclick="showPage(\'cart\')">← Retour au panier</button></div></div>';}
-async function confirmOrder(){const prenom=document.getElementById('prenom');const nom=document.getElementById('nom');const telephone=document.getElementById('telephone');const telephone2=document.getElementById('telephone2');const adresseLivraison=document.getElementById('adresse_livraison');let isValid=true;const requiredFields=[{el:prenom,error:'prenom-error'},{el:nom,error:'nom-error'},{el:telephone,error:'telephone-error'},{el:adresseLivraison,error:'adresse_livraison-error'}];requiredFields.forEach(field=>{const el=field.el;const errorEl=document.getElementById(field.error);if(!el.value||el.value===''){el.classList.add('error');if(errorEl)errorEl.style.display='block';isValid=false;}else{el.classList.remove('error');if(errorEl)errorEl.style.display='none';}});const phoneDigits=telephone.value.replace(/\s/g,'');if(phoneDigits.length!==9||!/^\d+$/.test(phoneDigits)){telephone.classList.add('error');document.getElementById('telephone-error').style.display='block';isValid=false;}if(telephone2.value){const phone2Digits=telephone2.value.replace(/\s/g,'');if(phone2Digits.length!==9||!/^\d+$/.test(phone2Digits)){telephone2.classList.add('error');document.getElementById('telephone2-error').style.display='block';isValid=false;}else{telephone2.classList.remove('error');document.getElementById('telephone2-error').style.display='none';}}if(!isValid){const firstError=document.querySelector('.error');if(firstError)firstError.focus();return;}const produitsListe=cart.map(item=>item.name+' (x'+item.qty+')').join(', ');const orderData={prenom:prenom.value.trim(),nom:nom.value.trim(),telephone:telephone.value,telephone_secondaire:telephone2.value||'',adresse_livraison:adresseLivraison.value.trim(),produits:produitsListe,produits_detail:cart.map(item=>({nom:item.name,quantite:item.qty,prix_unitaire:item.price,total:item.price*item.qty})),total_commande:getCartTotal(),date_commande:new Date().toISOString()};try{const{db,collection,addDoc}=window;const docRef=await addDoc(collection(db,"annonces"),orderData);console.log("Commande enregistrée avec ID:",docRef.id);cart=[];updateBadge();document.getElementById('checkout-content').innerHTML='<div class="success-screen"><div class="check">✅</div><h2>Commande confirmée !</h2><p>Merci pour votre achat. Votre commande a été enregistrée.<br>Livraison estimée : <strong>3 à 5 jours ouvrés</strong>.</p><button class="btn" onclick="showPage(\'shop\')">Retour à la boutique</button></div>';}catch(error){console.error("Erreur lors de l'enregistrement:",error);alert("Une erreur est survenue lors de l'enregistrement de votre commande. Veuillez réessayer.");}}
+async function confirmOrder() {
+    const prenom = document.getElementById('prenom');
+    const nom = document.getElementById('nom');
+    const telephone = document.getElementById('telephone');
+    const telephone2 = document.getElementById('telephone2');
+    const adresseLivraison = document.getElementById('adresse_livraison');
+
+    let isValid = true;
+
+    // Vérifier que Firebase Auth est prêt
+    if (!window.auth || !window.auth.currentUser) {
+        alert("La connexion sécurisée n'est pas encore prête. Veuillez patienter quelques secondes puis réessayer.");
+        return;
+    }
+
+    // Vérification des champs obligatoires
+    const requiredFields = [
+        { el: prenom, error: 'prenom-error' },
+        { el: nom, error: 'nom-error' },
+        { el: telephone, error: 'telephone-error' },
+        { el: adresseLivraison, error: 'adresse_livraison-error' }
+    ];
+
+    requiredFields.forEach(field => {
+        const value = field.el.value.trim();
+        const errorEl = document.getElementById(field.error);
+
+        if (!value) {
+            field.el.classList.add('error');
+            if (errorEl) errorEl.style.display = 'block';
+            isValid = false;
+        } else {
+            field.el.classList.remove('error');
+            if (errorEl) errorEl.style.display = 'none';
+        }
+    });
+
+    // Vérification du téléphone principal
+    const phoneDigits = telephone.value.replace(/\D/g, '');
+
+    if (phoneDigits.length !== 9) {
+        telephone.classList.add('error');
+        document.getElementById('telephone-error').style.display = 'block';
+        isValid = false;
+    } else {
+        telephone.classList.remove('error');
+        document.getElementById('telephone-error').style.display = 'none';
+    }
+
+    // Vérification du téléphone secondaire
+    if (telephone2.value.trim()) {
+        const phone2Digits = telephone2.value.replace(/\D/g, '');
+
+        if (phone2Digits.length !== 9) {
+            telephone2.classList.add('error');
+            document.getElementById('telephone2-error').style.display = 'block';
+            isValid = false;
+        } else {
+            telephone2.classList.remove('error');
+            document.getElementById('telephone2-error').style.display = 'none';
+        }
+    }
+
+    if (!isValid) {
+        const firstError = document.querySelector('.error');
+
+        if (firstError) {
+            firstError.focus();
+        }
+
+        return;
+    }
+
+    // Vérifier que le panier existe
+    if (!Array.isArray(cart) || cart.length === 0) {
+        alert("Votre panier est vide.");
+        showPage('cart');
+        return;
+    }
+
+    // Vérifier les produits et les quantités
+    const produitsValides = cart.every(item => {
+        return products.some(product => product.id === item.id)
+            && Number.isInteger(item.qty)
+            && item.qty > 0
+            && item.qty <= 1000;
+    });
+
+    if (!produitsValides) {
+        alert("Une erreur est survenue avec votre panier. Veuillez recommencer.");
+
+        cart = [];
+        updateBadge();
+        showPage('shop');
+
+        return;
+    }
+
+    // Recalculer le total à partir du catalogue
+    const totalCalcule = cart.reduce((total, item) => {
+        const product = products.find(p => p.id === item.id);
+
+        if (!product) {
+            return total;
+        }
+
+        return total + (product.price * item.qty);
+    }, 0);
+
+    // Vérification du montant
+    if (
+        !Number.isFinite(totalCalcule) ||
+        totalCalcule < 0 ||
+        totalCalcule > 100000000
+    ) {
+        alert("Montant de commande invalide.");
+        return;
+    }
+
+    // Préparer les détails des produits
+    const produitsDetail = cart.map(item => {
+        const product = products.find(p => p.id === item.id);
+
+        return {
+            id: product.id,
+            nom: product.name,
+            quantite: item.qty,
+            prix_unitaire: product.price,
+            total: product.price * item.qty
+        };
+    });
+
+    // Liste des produits
+    const produitsListe = cart
+        .map(item => {
+            const product = products.find(p => p.id === item.id);
+
+            return product.name + " (x" + item.qty + ")";
+        })
+        .join(', ');
+
+    // Données de la commande
+    const orderData = {
+        prenom: prenom.value.trim().slice(0, 50),
+        nom: nom.value.trim().slice(0, 50),
+
+        telephone: phoneDigits,
+
+        telephone_secondaire: telephone2.value
+            ? telephone2.value.replace(/\D/g, '')
+            : '',
+
+        adresse_livraison: adresseLivraison.value
+            .trim()
+            .slice(0, 300),
+
+        produits: produitsListe.slice(0, 2000),
+
+        produits_detail: produitsDetail,
+
+        total_commande: totalCalcule,
+
+        date_commande: new Date().toISOString()
+    };
+
+    try {
+        const { db, collection, addDoc, auth } = window;
+
+        // Vérification finale de l'authentification
+        if (!auth.currentUser) {
+            throw new Error("Utilisateur non authentifié.");
+        }
+
+        // Empêcher les doubles clics
+        const confirmButton = document.querySelector('.confirm-btn');
+
+        if (confirmButton) {
+            confirmButton.disabled = true;
+            confirmButton.textContent = "Enregistrement...";
+        }
+
+        // Enregistrer la commande dans Firestore
+        const docRef = await addDoc(
+            collection(db, "annonces"),
+            orderData
+        );
+
+        console.log("Commande enregistrée :", docRef.id);
+
+        // Vider le panier
+        cart = [];
+        updateBadge();
+
+        // Afficher la confirmation
+        document.getElementById('checkout-content').innerHTML = `
+            <div class="success-screen">
+                <div class="check">✅</div>
+
+                <h2>Commande confirmée !</h2>
+
+                <p>
+                    Merci pour votre achat.
+                    Votre commande a été enregistrée.
+                    <br>
+                    Livraison estimée :
+                    <strong>3 à 5 jours ouvrés</strong>.
+                </p>
+
+                <button class="btn" onclick="showPage('shop')">
+                    Retour à la boutique
+                </button>
+            </div>
+        `;
+
+    } catch (error) {
+
+        console.error("Erreur commande :", error);
+
+        const confirmButton = document.querySelector('.confirm-btn');
+
+        if (confirmButton) {
+            confirmButton.disabled = false;
+            confirmButton.textContent = "✅ Confirmer la commande";
+        }
+
+        alert(
+            "Impossible d'enregistrer la commande. " +
+            "Veuillez vérifier votre connexion puis réessayer."
+        );
+    }
+}
 renderProducts();
 window.showPage=showPage;window.addToCart=addToCart;window.openDetail=openDetail;window.slideDetail=slideDetail;window.goToDetailSlide=goToDetailSlide;window.slideCard=slideCard;window.goToCardSlide=goToCardSlide;window.changeQty=changeQty;window.removeFromCart=removeFromCart;window.confirmOrder=confirmOrder;window.formatPhone=formatPhone;window.renderProducts=renderProducts;
 </script>
